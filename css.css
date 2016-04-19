@@ -1,0 +1,87 @@
+ body{ font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体" !important;}
+
+.form-item-head {
+    background: #5F9EDF;
+}
+
+.filed-item {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    margin: 10px 0;
+    padding: 5px;
+    position: relative;
+    cursor: move;
+}
+
+.filed-item > .js-remove {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    top: 0;
+    right: 0;
+    background: #c30;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+}
+
+.filed-item-hover {
+    border: 1px dashed #c00 !important;
+}
+
+.filed-item-hover > .js-remove {
+    display: block;
+}
+
+.form {
+    border: 1px solid #ccc;
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #f0f0f0;
+}
+
+.active {
+    border: 1px solid #c00 !important;
+}
+#viewFieldView {list-style: none; margin:0; padding:0;}
+#viewFieldView li{width: 45%;
+    float: left;
+    margin-right: 4%;
+    background: rgba(1,1,1,.7);
+    color: #fff;
+    padding: 10px 8px 10px 8px;
+  font-size: 12px;
+  }
+
+  #builderView {list-style:none; font-size: 15px;} 
+   #builderView li{ text-indent: -999em;height: 7px; background: none !important; border-bottom: 3px solid #ff0000;margin-bottom: 3px; padding:0; position: relative; border-radius: 0; }
+    #builderView li:before{ position: absolute;content:"";width: 3px; height: 10px; background: #f00; left: 0; top:0; }
+     #builderView li:after{ position: absolute;content:"";width: 3px; height: 10px; background: #f00; right: 0; top:0; }
+     #builderView .handle{display: table-row;}
+     #builderView .filed-item:after{ content:"";display:block; clear: both; overflow:hidden; }
+     #builderView .text{     display: table-cell;
+    width: 120px;
+    padding-right: 20px;
+    word-break: break-all; }
+          #builderView .des{ display: table-cell; color: #999; }
+          /*多行文本*/
+    #builderView .paragraph{height: 80px;}
+    /*单选、多选*/
+    #builderView .choose .des{ text-align: right;
+    width: 80%; }
+     #builderView .line {height: 1px;
+    background-color: #eee;
+    margin: 6px 0;}
+
+  /*分组*/
+/*  #builderView .addbtn{ position: absolute; bottom:0; background: #8AD0EA; height: 30px; line-height: 30px; width: 98%; text-align: center; }*/
+  #builderView .addbtn{ position: absolute; bottom:0; left: 0; background: #8AD0EA;height: 30px; line-height: 30px;  text-align: center; margin-top: 30px; display: block; width: 90%;  }
+#builderView .group .handle{display: block;}
+    #builderView .group{ border: 1px solid #ccc;
+    min-height: 150px;
+    padding-bottom:30px; }
