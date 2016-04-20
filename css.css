@@ -6,9 +6,11 @@
 
 .filed-item {
     background: #ffffff;
-    border: 1px solid #f0f0f0;
+    border: 1px solid #c8c8c8;
+  /*  border-left: 1px solid #fff;
+    border-right: 1px solid #fff;;*/
     margin: 10px 0;
-    padding: 5px;
+    padding: 10px 10px;
     position: relative;
     cursor: move;
 }
@@ -30,7 +32,7 @@
 }
 
 .filed-item-hover {
-    border: 1px dashed #c00 !important;
+  border:1px dashed #c00;
 }
 
 .filed-item-hover > .js-remove {
@@ -38,12 +40,37 @@
 }
 
 .form {
-    border: 1px solid #ccc;
+    border:1px solid #e8e8e8;
+    background: #fff;
+    padding:20px 10px;
+    border-radius: 10px;
+}
+#builderView{  
+  background: #f7f7f7;
     height: 500px;
     overflow-y: auto;
-    overflow-x: hidden;
-    background: #f0f0f0;
+    overflow-x: hidden; 
+
+  }
+#builderView::-webkit-scrollbar-track
+{
+  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+  background-color: #f7f7f7;
 }
+
+#builderView::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #f7f7f7;
+}
+
+#builderView::-webkit-scrollbar-thumb
+{
+  background-color: #333;
+}
+
+
+
 
 .active {
     border: 1px solid #c00 !important;
@@ -67,8 +94,9 @@
      #builderView .text{     display: table-cell;
     width: 120px;
     padding-right: 20px;
+    font-size: 11.5pt;
     word-break: break-all; }
-          #builderView .des{ display: table-cell; color: #999; }
+          #builderView .des{ display: table-cell; color: #999; font-size: 12px; }
           /*多行文本*/
     #builderView .paragraph{height: 80px;}
     /*单选、多选*/
@@ -80,8 +108,24 @@
 
   /*分组*/
 /*  #builderView .addbtn{ position: absolute; bottom:0; background: #8AD0EA; height: 30px; line-height: 30px; width: 98%; text-align: center; }*/
-  #builderView .addbtn{ position: absolute; bottom:0; left: 0; background: #8AD0EA;height: 30px; line-height: 30px;  text-align: center; margin-top: 30px; display: block; width: 90%;  }
+  #builderView .addbtn{ position: absolute; bottom:0; left: 0; background: #8AD0EA;height: 30px; line-height: 30px;  text-align: center; margin-top: 30px; display: block; width: 100%;  }
 #builderView .group .handle{display: block;}
     #builderView .group{ border: 1px solid #ccc;
     min-height: 150px;
-    padding-bottom:30px; }
+    padding-bottom:30px; 
+    padding-top:30px;
+    background: #f0f0f0;}
+.group-title{position: absolute; height: 30px; width: 100%; top: 0; left: 0; line-height: 30px; background: #f7f7f7; border-bottom: 1px solid #e8e8e8;padding-left: 10px; }
+    /*编辑框*/
+    #myTab .active,#myTabContent .active{ border:none !important; }
+.edit-content{ padding: 10px 0; }
+.edit-item{margin-bottom: 10px;}
+.edit-item-title{
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5px;
+}
+.edit-item  .edit-input { border:1px solid #e8e8e8; width: 100%; padding: 5px; }
+.edit-item .option-label-input{ border:1px solid #e8e8e8; padding: 5px; margin-bottom: 3px; }
+
+.edit-content .fa{ cursor: pointer; }

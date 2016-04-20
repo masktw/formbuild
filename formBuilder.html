@@ -59,11 +59,11 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-5">
-                <div class="form" id="builderView">
+            <div class="col-md-5 form">
+                <div id="builderView">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <ul id="myTab" class="nav nav-tabs">
                     <li class="active"><a href="#editFieldView" data-toggle="tab">
      编辑</a>
@@ -103,18 +103,20 @@
         {{#js_compare "this.field_type == 'pic'"}} {{> "pic"}} {{/js_compare}}
         <!-- 分组 -->
         {{#js_compare "this.field_type == 'group'"}}
-        <div id="{{cid}}" class="filed-item group" data-id={{cid}} data-fieldType={{field_type}}>
+        <div id="{{cid}}" class="filed-item group" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
-                {{label}}
+                <div class="group-title">{{label}}</div>
+                <div class="addbtn">+ <span>{{describe}}</span> </div>
             </div>
+            <div style="height: 1px; overflow: hidden;">&nbsp;</div>
             {{#each this.group}} {{#js_compare "this.field_type == 'radio'"}} {{> "radio"}} {{/js_compare}} {{/each}}
         </div>
         {{/js_compare}} {{/each}}
     </script>
     <!-- 单行文本 -->
     <script type="text/template7" id="view_text">
-        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="text ">{{label}}</div>
@@ -125,9 +127,9 @@
     </script>
     <!-- 多行文本 -->
     <script type="text/template7" id="view_paragraph">
-        <div id="{{cid}}" class="filed-item paragraph" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-field_options="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item paragraph" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
-             <div class="handle">
+            <div class="handle">
                 <div class="text ">{{label}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
@@ -136,9 +138,9 @@
     </script>
     <!-- 多选 -->
     <script type="text/template7" id="view_checkboxes">
-        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-field_options="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
-             <div class="handle">
+            <div class="handle">
                 <div class="text ">{{label}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
@@ -147,9 +149,9 @@
     </script>
     <!-- 单选 -->
     <script type="text/template7" id="view_radio">
-        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-field_options="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
-             <div class="handle">
+            <div class="handle">
                 <div class="text ">{{label}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
@@ -158,9 +160,9 @@
     </script>
     <!-- 日期 -->
     <script type="text/template7" id="view_date">
-        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-field_options="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
-             <div class="handle">
+            <div class="handle">
                 <div class="text ">{{label}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
@@ -169,28 +171,26 @@
     </script>
     <!-- 日期区间 -->
     <script type="text/template7" id="view_datearea">
-        <div id="{{cid}}" class="filed-item choose  " data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-field_options="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose  " data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
-             <div class="handle">
+            <div class="handle">
                 <div class="text">{{label}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
-
             </div>
             <div class="line">&nbsp;</div>
-              <div class="handle">
+            <div class="handle">
                 <div class="text">{{label}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
-                
             </div>
         </div>
     </script>
     <!-- 数字 -->
     <script type="text/template7" id="view_number">
-        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-field_options="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
-             <div class="handle">
+            <div class="handle">
                 <div class="text ">{{label}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
@@ -199,9 +199,9 @@
     </script>
     <!-- 金额 -->
     <script type="text/template7" id="view_price">
-        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-field_options="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
-             <div class="handle">
+            <div class="handle">
                 <div class="text ">{{label}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
@@ -210,9 +210,9 @@
     </script>
     <!-- 图片 -->
     <script type="text/template7" id="view_pic">
-        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-field_options="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
-             <div class="handle">
+            <div class="handle">
                 <div class="text ">{{label}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
@@ -221,30 +221,49 @@
     </script>
     <!-- 分组 -->
     <script type="text/template7" id="view_group">
-        <div id="{{cid}}" class="filed-item group" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-field_options="{{field_options}}" data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item group" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
-                {{label}}
-            <div class="addbtn">+ <span >{{describe}}</span> </div>
+                <div class="group-title">{{label}}</div>
+                <div class="addbtn">+ <span>{{describe}}</span> </div>
             </div>
-            
+            <div style="height: 1px; overflow: hidden;">&nbsp;</div>
         </div>
     </script>
     <!-- 编辑 -->
     <script type="text/template7" id="edit_text">
         {{#this}}
-        <div>
-            <label for="inputLabel">
-                <div>标题</div>
-                <input type="text" id="inputLabel" value="{{label}}" />
-            </label>
-            <label for="inputDes">
-                <div>描述</div>
-                <input type="text" id="inputDes" value="{{describe}}" />
-            </label>
-            <label for="inputRequired">必填  
-                <input type="checkbox" id="inputRequired" {{#if required}}checked{{/if}} />
-            </label>
+        <div class="edit-content">
+            <div class="edit-item">
+                <div class="edit-item-title">标题</div>
+                <input class="edit-input" type="text" id="inputLabel" value="{{label}}" />
+            </div>
+            <div class="edit-item"></div>
+            {{#js_compare "this.fieldtype !='date' && this.fieldtype !='pic'"}}
+            <div class="edit-item">
+                <div class="edit-item-title"> {{#js_compare "this.fieldtype =='group'"}}动作名称{{else}}提示文字{{/js_compare}}</div>
+                <input class="edit-input" type="text" id="inputDes" value="{{describe}}" />
+            </div>
+            {{#js_compare "this.fieldtype =='radio' || this.fieldtype =='checkboxes'"}}
+            <div class="edit-item">
+                <div class="edit-item-title">选项</div>
+                {{#each this.field_options.options}}
+                <div class="option" data-index="{{@index}}">
+                    <input type="text" class="option-label-input" value="{{label}}">
+                    <a class="js-add-option fb-button" title="Add Option"><i class="fa fa-plus-circle fa-lg"></i></a>
+                    <a class="js-remove-option fb-button" title="Remove Option"><i class="fa fa-minus-circle fa-lg"></i></a>
+                    <span class="option-error option-error-null hidden">不能超过10个字</span><span class="option-error option-error-repeat hidden">有重复项</span></div>
+                {{/each}}
+            </div>
+            {{/js_compare}} {{/js_compare}}
+            {{#js_compare "this.fieldtype !='group'"}}
+                <div class="edit-item">
+                <div class="edit-item-title">验证</div>
+                <input type="checkbox" id="inputRequired" {{#js_compare "this.required === 'true'"}}checked{{/js_compare}} />
+                <label for="inputRequired"> 必填 </label>
+            </div>
+            {{/js_compare}}
+        
         </div>
         {{/this}}
     </script>
@@ -275,11 +294,15 @@
         Template7.registerHelper("trim", function(text) {
             var result;
             result = text.replace(/(^\s+)|(\s+$)/g, "");
-            // if (is_global.toLowerCase() == "g") {
-            //     result = result.replace(/\s/g, "");
-            // }
+            result = result.replace(/\s/g, "");
+            return result;
+        });
 
-             result = result.replace(/\s/g, "");
+        //JSON转字符串
+        Template7.registerHelper("jsonTostring", function(text) {
+            // console.log(text instanceof Object)
+            var result;
+            result = JSON.stringify(text);
             return result;
         });
 
@@ -293,6 +316,8 @@
         var bv = $("#builderView");
         var curItem = null;
         var CID = 0;
+        //option label的数组
+
         //控件名称数组，判断名称是否重复用
         var tempArrFieldType = {
             text: [],
@@ -300,7 +325,7 @@
             checkboxes: [],
             radio: [],
             date: [],
-            datearea:[],
+            datearea: [],
             number: [],
             price: [],
             pic: [],
@@ -378,6 +403,11 @@
                 el.each(function() {
 
                 })
+            },
+            //数组指定位置插入数据
+            arrInsert: function(arr, index, item) {
+                console.log(index)
+                arr.splice(index, 0, item);
             }
         }
         var formData = {
@@ -389,7 +419,7 @@
                 "field_type": "radio",
                 "required": true,
                 "capital": true,
-                "describe":"请输入",
+                "describe": "请输入",
                 "field_options": {
                     "options": [{
                         "label": "办公费",
@@ -417,7 +447,7 @@
                 "field_type": "price",
                 "required": true,
                 "capital": true,
-                "describe":"请输入",
+                "describe": "请输入",
                 "field_options": {},
                 "cid": "c5"
             }, {
@@ -425,11 +455,12 @@
                 "field_type": "group",
                 "required": false,
                 "capital": false,
-                "describe":"请输入",
+                "describe": "请输入",
+                "field_options": {},
                 "group": [{
                     "label": "费用明细",
                     "field_type": "radio",
-                    "describe":"请输入",
+                    "describe": "请输入",
                     "required": false,
                     "capital": true,
                     "field_options": {
@@ -439,7 +470,7 @@
                 }, {
                     "label": "费用明细2",
                     "field_type": "paragraph",
-                    "describe":"请输入",
+                    "describe": "请输入",
                     "required": false,
                     "capital": true,
                     "field_options": {
@@ -451,7 +482,7 @@
             }, {
                 "label": "费用明细",
                 "field_type": "paragraph",
-                "describe":"请输入",
+                "describe": "请输入",
                 "required": false,
                 "capital": true,
                 "field_options": {
@@ -461,7 +492,7 @@
             }, {
                 "label": "分组2",
                 "field_type": "group",
-                "describe":"请输入",
+                "describe": "请输入",
                 "required": false,
                 "capital": false,
                 "group": [{
@@ -475,7 +506,7 @@
                     "cid": "c162"
                 }, {
                     "label": "费用4细2",
-                    "describe":"请输入",
+                    "describe": "请输入",
                     "field_type": "radio",
                     "required": false,
                     "capital": true,
@@ -488,7 +519,7 @@
             }, {
                 "label": "附件",
                 "field_type": "pic",
-                "describe":"请输入",
+                "describe": "请输入",
                 "required": false,
                 "capital": true,
                 "field_options": {},
@@ -505,7 +536,14 @@
                         });
                         for (var i = 0; i < data.fields.length; i++) {
                             var field = data.fields[i];
+                            //console.log("field", field)
                             formTool.saveFieldType(field);
+
+                            // //初始化单选，多选
+                            // if(field.field_type === "radio" || field.field_type === "checkbox"){
+                            //     field.field_options = JSON.stringify(field.field_options);
+                            // }
+
                             if (field.field_type === "group") {
                                 for (var j in field.group) {
                                     var groupField = field.group[j];
@@ -528,7 +566,7 @@
                                     },
                                     onStart: function(evt) {
                                         formTool.closePut(evt, FormBuilder.arrSortable);
-                                        
+
                                         formTool.selectedField(evt);
                                         FormBuilder.showEdit(evt);
                                         console.log('onStart', evt.item);
@@ -549,13 +587,13 @@
                         "field_type": "",
                         "required": true,
                         "capital": true,
-                        "field_options": "",
+                        "field_options": {},
                         "cid": cid
                     };
 
                     var item = $(evt.item);
                     var itemType = item.data("type");
-                  
+
                     // switch(itemType){
                     //   case "text":
 
@@ -567,16 +605,42 @@
                     //console.log(evt.item.parentElement)
                     if (itemType) {
                         var len = tempArrFieldType[itemType].length;
-                    if (len) {
-                        obj.label = item.text() + "(" + (len + 1) + ")";
-                    } else {
-                        obj.label = item.text();
-                    }
-                    tempArrFieldType[itemType].push(itemType);
+                        if (len) {
+                            obj.label = item.text() + "(" + (len + 1) + ")";
+                        } else {
+                            obj.label = item.text();
+                        }
+                        tempArrFieldType[itemType].push(itemType);
+                        //单选、多选
+                        switch (itemType) {
+                            case "radio":
+                            case "checkboxes":
+                                obj.field_options = {
+                                        options: [{
+                                            label: "",
+                                            checked: false
+                                        }, {
+                                            label: "",
+                                            checked: false
+                                        }, {
+                                            label: "",
+                                            checked: false
+                                        }]
+                                    },
+                                    obj.describe = "请选择";
+                                break;
+                            case "date":
+                            case "datearea":
+                                obj.describe = "请选择";
+                                break;
+                        }
+
                         formTool.render($("#view_" + itemType), obj, function(html) {
                             item.replaceWith(html);
                         })
-                        if (item.data("type") === "group") {
+                        console.log("itemType", itemType)
+
+                        if (itemType === "group") {
                             _this.arrSortable.push(Sortable.create($("#" + cid)[0], {
                                 group: {
                                     name: 'advanced',
@@ -600,7 +664,7 @@
                 },
                 showEdit: function(evt) {
                     //console.log(typeof evt == "string")
-                    if (typeof evt == "string") {
+                    if (typeof evt === "string") {
                         curItem = $("#" + evt);
                     } else {
                         //是否为新加元素
@@ -608,17 +672,27 @@
                         curItem = (evt.clone === undefined || evt.clone === null) ? $(evt.item) : $("#c" + CID);
                     }
 
-					console.log("curItem",curItem)
-                    //console.log($("#c"+CID).data("id"))
+                    console.log(curItem)
+                        //console.log($("#c"+CID).data("id"))
                     var obj = {};
-                    obj.label = curItem.data("label");
-                    obj.describe = curItem.data("describe");
-                    obj.required = curItem.data("required");
+                    obj.label = curItem.attr("data-label");
+                    obj.describe = curItem.attr("data-describe");
+                    obj.required = curItem.attr("data-required");
+                    obj.fieldtype = curItem.attr("data-fieldtype");
+                    obj.field_options = JSON.parse(curItem.attr("data-fieldoptions"));
+
+                    // if (obj.field_options.hasOwnProperty("options")) {
+                    //     for (var i in obj.field_options.options) {
+                    //         arrOption.push(obj.field_options.options[i].label);
+                    //     }
+                    // }
+                    // console.log(arrOption)
                     //console.log(curItem.find(".handle").text())
                     formTool.render($("#edit_text"), obj, function(html) {
                         //console.log(obj)
                         editView.html(html);
                     });
+                    console.log("obj", obj)
                     $('#myTab li:eq(0) a').tab('show');
                 },
                 arrSortable: [],
@@ -651,6 +725,7 @@
             filter: '.js-remove',
             onFilter: function(evt) {
                 evt.item.parentNode.removeChild(evt.item);
+                $('#myTab li:eq(1) a').tab('show');
             },
             // store: {
             //     get: function(sortable) {
@@ -752,29 +827,107 @@
             formTool.checkSubmit();
         });
         //编辑框，必填
-        editView.on("click","#inputRequired",function(){
-        	var _this = $(this);
-        	var isRequired = _this.prop("checked");
-        	curItem.attr("data-required",isRequired);
-            curItem.find(".required").text(isRequired?"(必填)":"");
+        editView.on("click", "#inputRequired", function() {
+            var _this = $(this);
+            var isRequired = _this.prop("checked");
+            curItem.attr("data-required", isRequired);
+            curItem.find(".required").text(isRequired ? "(必填)" : "");
         })
 
         //默认tab显示
         $('#myTab li:eq(1) a').tab('show');
         //点击tab默认当前点击item被点击，否则显示第一个item
- $('#myTab li:eq(0) a').click(function(){
-      $(this).tab('show');
-      if(curItem){
-         curItem.trigger("click");
-       }else if(bv.children(".filed-item").length){
-          bv.children(".filed-item").eq(0).trigger("click");
-       }else{
-          editView.html("");
-       }
-     
+        $('#myTab li:eq(0) a').click(function() {
+            $(this).tab('show');
+            if (curItem) {
+                curItem.trigger("click");
+            } else if (bv.children(".filed-item").length) {
+                bv.children(".filed-item").eq(0).trigger("click");
+            } else {
+                editView.html("");
+            }
 
- });
-        //鼠标移入控件
+
+        });
+        //单选、多选选项操作
+        //添加
+        editView.on("click", ".js-add-option", function() {
+            var _this = $(this);
+            var option = _this.parent();
+            var index = option.data("index");
+            var curItemOption = curItem.attr("data-fieldoptions");
+            var jsonData = JSON.parse(curItemOption);
+
+            var arrObj = {
+                label: "",
+                checked: false
+            }
+            formTool.arrInsert(jsonData.options, index + 1, arrObj);
+            curItem.attr("data-fieldoptions", JSON.stringify(jsonData));
+            var obj = {};
+            obj.label = curItem.attr("data-label");
+            obj.describe = curItem.attr("data-describe");
+            obj.required = curItem.attr("data-required");
+            obj.fieldtype = curItem.attr("data-fieldtype");
+            obj.field_options = JSON.parse(curItem.attr("data-fieldoptions"));
+
+            formTool.render($("#edit_text"), obj, function(html) {
+                //console.log(obj)
+                editView.html(html);
+            });
+        });
+
+        //移除
+        editView.on("click", ".js-remove-option", function() {
+
+            // var options = editView.find(".option");
+            var _this = $(this);
+            var option = _this.parent();
+            var index = option.data("index");
+            option.remove();
+            var curItemOption = curItem.attr("data-fieldoptions");
+            var jsonData = JSON.parse(curItemOption);
+            jsonData.options.splice(index, 1);
+            curItem.attr("data-fieldoptions", JSON.stringify(jsonData))
+            var obj = {};
+            obj.label = curItem.attr("data-label");
+            obj.describe = curItem.attr("data-describe");
+            obj.required = curItem.attr("data-required");
+            obj.fieldtype = curItem.data("fieldtype");
+            obj.field_options = JSON.parse(curItem.attr("data-fieldoptions"));
+
+
+
+            console.log("obj.field_options", obj.field_options)
+                // if(obj.field_options.hasOwnProperty("options")){
+                //     for(var i in obj.field_options.options){
+                //         arrOption.push(obj.field_options.options[i].label);
+                //     }
+                // }
+                // console.log(arrOption)
+                //console.log(curItem.find(".handle").text())
+            formTool.render($("#edit_text"), obj, function(html) {
+                //console.log(obj)
+                editView.html(html);
+            });
+
+
+
+        });
+        //选项输入
+        editView.on("input", ".option-label-input", function(e) {
+                var _this = $(this);
+                var option = _this.parent();
+                var index = option.data("index");
+                var curItemOption = curItem.attr("data-fieldoptions");
+                var val = _this.val();
+                var jsonData = JSON.parse(curItemOption);
+
+                jsonData.options[index].label = val;
+                curItem.attr("data-fieldoptions", JSON.stringify(jsonData));
+                console.log(curItemOption)
+            })
+            //鼠标移入控件
         bv.on("mouseover mouseout", ".filed-item", function(e) {
             e.stopPropagation();
             $(this).toggleClass("filed-item-hover");
