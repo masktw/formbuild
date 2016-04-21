@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>jQuery网页顶部显示操作提示插件 - 聚合分享 - www.juheweb.com</title>
+<link type="text/css" rel="stylesheet" href="css/css.css" />
+<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="js/msgTips.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function (){
+	$("#ie").manhua_msgTips({
+		Event : "click",			//响应的事件
+		timeOut : 4000,				//提示层显示的时间
+		msg : "为了保证更好的网站体验，请升级IE版本到8.0或以上!",			//显示的消息
+		speed : 300,				//滑动速度
+		type : "warning"			//提示类型（1、success 2、error 3、warning）
+
+	});
+	$("#no").manhua_msgTips({
+		Event : "click",			//响应的事件
+		timeOut : 4000,				//提示层显示的时间
+		msg : "很抱歉!您好操作此插件错误，请重新操作！",			//显示的消息
+		speed : 300,				//滑动速度
+		type : "error"			//提示类型（1、success 2、error 3、warning）
+
+	});
+	$("#yes").manhua_msgTips({
+		Event : "click",			//响应的事件
+		timeOut : 4000,				//提示层显示的时间
+		msg : "恭喜你！操作成功，欢迎访问聚合分享网站（www.juheweb.com）",			//显示的消息
+		speed : 300,				//滑动速度
+		type : "success"			//提示类型（1、success 2、error 3、warning）
+
+	});
+});
+</script>
+<style>
+input{padding:10px 20px;}
+</style>
+</head>
+<body>
+    <div style="margin:300px auto; width:350px;">
+        <input type="button" id="ie" value="警告提示" />&nbsp;&nbsp;
+        <input type="button" id="no" value="错误提示" />&nbsp;&nbsp;
+        <input type="button" id="yes" value="成功提示" />
+    </div>
+<!--以下代码不作为插件效果内容 -->
+<style>.jhp{ padding:5px 0px; text-align:center; font-size:12px;clear:both; margin:0px; }.d_foot_o{ text-align:center; margin:35px 0 10px 0 ;clear:both; }</style>
+
+    <div class="d_foot_o">标题：<a title="" href="http://www.juheweb.com/js/tc/204.html">jQuery网页顶部显示操作提示插件</a>&nbsp;&nbsp;&nbsp;栏目分类：<a class="lm" title="弹出提示" target="_blank" href="http://www.juheweb.com/js/tc/">弹出提示</a>&nbsp;&nbsp;&nbsp;素材整理：<a href="http://www.juheweb.com">聚合分享</a>&nbsp;&nbsp;&nbsp;下载：<a title="立即下载" href="http://www.juheweb.com/js/tc/204.html">立即下载</a></div><p class="jhp">&#12288;本代码仅限于学习交流，请勿用于商业用途! </p><p class="jhp">声明:聚合分享素材网代码来源于互联网,精心整理,转载请注明出处!</p>
+</body>
+</html>

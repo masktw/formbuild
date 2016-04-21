@@ -8,17 +8,19 @@
     <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="./js/Sortable.js"></script>
-    <!--    <script src="http://cdn.bootcss.com/jquery/3.0.0-beta1/jquery.min.js"></script> -->
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="./js/template7.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
-    <style>
-
-    </style>
 </head>
 
 <body>
     <div class="container" ms-controller="formBuilder">
+        <div id="tips" class="tips ani">
+            <span class="tips-icon">
+                <i class="fa fa-clock"></i>
+            </span>
+            <span class="tips-content">fdfdsfdsf</span>
+        </div>
         <div class="row">
             <button class="btn btn-default" disabled="true" id="submitBtn">保存</button>
         </div>
@@ -52,7 +54,7 @@
                         <div class="handle">金额</div>
                     </li>
                     <li data-type="pic" class="filed-item">
-                        <div class="handle">图片</div>
+                        <div class="handle">附件</div>
                     </li>
                     <li data-type="group" class="filed-item">
                         <div class="handle">分组</div>
@@ -72,15 +74,40 @@
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="editFieldView">
-                        <p>W3Cschoool菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
+                        <!-- 控件属性编辑 -->
                     </div>
                     <div class="tab-pane fade" id="formBuilderEdit">
-                        <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+                        <!-- 表单标题、图标、说明设置 -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- 设置模板 -->
+    <script type="text/template7" id="form_set_template">
+        <div class="edit-item">
+            <div class="edit-item-title">审批名称 <span class="verify">最多6个字</span></div>
+            <input class="edit-input" type="text" id="inputSetTitle" value="{{title}}" maxlength="6" />
+        </div>
+        <div class="edit-item">
+            <div class="edit-item-title">审批说明 <span class="verify">最多50个字</span></div>
+            <textarea rows="3" class="edit-input" id="inputSetAbstact" value="{{abstact}}">{{abstact}}</textarea>
+        </div>
+        <div class="edit-item">
+            <div class="edit-item-title">图标</div>
+            <ul id="approveIcon">
+                <li {{#js_compare "this.icon ==='./content/img/approvalIcon/approvalIcon_1.png'"}} class="active" {{/js_compare}}><img src="./content/img/approvalIcon/approvalIcon_1.png"></li>
+                <li {{#js_compare "this.icon ==='./content/img/approvalIcon/approvalIcon_2.png'"}} class="active" {{/js_compare}}><img src="./content/img/approvalIcon/approvalIcon_2.png"></li>
+                <li {{#js_compare "this.icon ==='./content/img/approvalIcon/approvalIcon_3.png'"}} class="active" {{/js_compare}}><img src="./content/img/approvalIcon/approvalIcon_3.png"></li>
+                <li {{#js_compare "this.icon ==='./content/img/approvalIcon/approvalIcon_4.png'"}} class="active" {{/js_compare}}><img src="./content/img/approvalIcon/approvalIcon_4.png"></li>
+                <li {{#js_compare "this.icon ==='./content/img/approvalIcon/approvalIcon_5.png'"}} class="active" {{/js_compare}}><img src="./content/img/approvalIcon/approvalIcon_5.png"></li>
+                <li {{#js_compare "this.icon ==='./content/img/approvalIcon/approvalIcon_6.png'"}} class="active" {{/js_compare}}><img src="./content/img/approvalIcon/approvalIcon_6.png"></li>
+                <li {{#js_compare "this.icon ==='./content/img/approvalIcon/approvalIcon_7.png'"}} class="active" {{/js_compare}}><img src="./content/img/approvalIcon/approvalIcon_7.png"></li>
+                <li {{#js_compare "this.icon ==='./content/img/approvalIcon/approvalIcon_8.png'"}} class="active" {{/js_compare}}><img src="./content/img/approvalIcon/approvalIcon_8.png"></li>
+                <li {{#js_compare "this.icon ==='./content/img/approvalIcon/approvalIcon_9.png'"}} class="active" {{/js_compare}}><img src="./content/img/approvalIcon/approvalIcon_9.png"></li>
+            </ul>
+        </div>
+    </script>
     <!-- 表单模板 -->
     <script type="text/template7" id="form_items_template">
         <!-- 单行文本 -->
@@ -103,11 +130,11 @@
         {{#js_compare "this.field_type == 'pic'"}} {{> "pic"}} {{/js_compare}}
         <!-- 分组 -->
         {{#js_compare "this.field_type == 'group'"}}
-        <div id="{{cid}}" class="filed-item group" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item group" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="group-title">{{label}}</div>
-                <div class="addbtn">+ <span>{{describe}}</span> </div>
+                <div class="addbtn">+ <span class="group-tips">{{describe}}</span> </div>
             </div>
             <div style="height: 1px; overflow: hidden;">&nbsp;</div>
             {{#each this.group}} {{#js_compare "this.field_type == 'radio'"}} {{> "radio"}} {{/js_compare}} {{/each}}
@@ -116,7 +143,7 @@
     </script>
     <!-- 单行文本 -->
     <script type="text/template7" id="view_text">
-        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="text ">{{label}}</div>
@@ -127,7 +154,7 @@
     </script>
     <!-- 多行文本 -->
     <script type="text/template7" id="view_paragraph">
-        <div id="{{cid}}" class="filed-item paragraph" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item paragraph" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="text ">{{label}}</div>
@@ -138,7 +165,7 @@
     </script>
     <!-- 多选 -->
     <script type="text/template7" id="view_checkboxes">
-        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="text ">{{label}}</div>
@@ -149,7 +176,7 @@
     </script>
     <!-- 单选 -->
     <script type="text/template7" id="view_radio">
-        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="text ">{{label}}</div>
@@ -160,7 +187,7 @@
     </script>
     <!-- 日期 -->
     <script type="text/template7" id="view_date">
-        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="text ">{{label}}</div>
@@ -171,7 +198,7 @@
     </script>
     <!-- 日期区间 -->
     <script type="text/template7" id="view_datearea">
-        <div id="{{cid}}" class="filed-item choose  " data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose  " data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-label2="{{trim label2}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="text">{{label}}</div>
@@ -180,7 +207,7 @@
             </div>
             <div class="line">&nbsp;</div>
             <div class="handle">
-                <div class="text">{{label}}</div>
+                <div class="text">{{label2}}</div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
             </div>
@@ -188,10 +215,10 @@
     </script>
     <!-- 数字 -->
     <script type="text/template7" id="view_number">
-        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
-                <div class="text ">{{label}}</div>
+                <div class="text ">{{label}} <span class="unit"></span> </div>
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
             </div>
@@ -206,11 +233,14 @@
                 <div class="des"><span class="describe">{{describe}}</span><span class="required">{{#if required}}(必填){{/if}}</span>
                 </div>
             </div>
+            <div class='handle capital {{#js_compare "this.capital !=true"}}hidden{{/js_compare}}'>
+                大写：壹万元整(示例)
+            </div>
         </div>
     </script>
     <!-- 图片 -->
     <script type="text/template7" id="view_pic">
-        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item choose" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="text ">{{label}}</div>
@@ -221,11 +251,11 @@
     </script>
     <!-- 分组 -->
     <script type="text/template7" id="view_group">
-        <div id="{{cid}}" class="filed-item group" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-capital={{capital}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
+        <div id="{{cid}}" class="filed-item group" data-id={{cid}} data-fieldType={{field_type}} data-required={{required}} data-fieldoptions='{{jsonTostring field_options}}' data-label="{{trim label}}" data-describe={{describe}}>
             <div class="js-remove">X</div>
             <div class="handle">
                 <div class="group-title">{{label}}</div>
-                <div class="addbtn">+ <span>{{describe}}</span> </div>
+                <div class="addbtn">+ <span class="group-tips">{{describe}}</span> </div>
             </div>
             <div style="height: 1px; overflow: hidden;">&nbsp;</div>
         </div>
@@ -235,60 +265,74 @@
         {{#this}}
         <div class="edit-content">
             <div class="edit-item">
-                <div class="edit-item-title">标题</div>
+                <div class="edit-item-title">标题 <span class="verify">最多6个字</span></div>
                 <input class="edit-input" type="text" id="inputLabel" value="{{label}}" />
             </div>
             <div class="edit-item"></div>
-            {{#js_compare "this.fieldtype !='date' && this.fieldtype !='pic'"}}
+            {{#js_compare "this.fieldtype !='date' && this.fieldtype !='datearea' && this.fieldtype !='pic'"}}
             <div class="edit-item">
-                <div class="edit-item-title"> {{#js_compare "this.fieldtype =='group'"}}动作名称{{else}}提示文字{{/js_compare}}</div>
+                <div class="edit-item-title">{{#js_compare "this.fieldtype =='group'"}}动作名称{{else}}提示文字{{/js_compare}}<span class="verify">最多10个字</span></div>
                 <input class="edit-input" type="text" id="inputDes" value="{{describe}}" />
             </div>
-            {{#js_compare "this.fieldtype =='radio' || this.fieldtype =='checkboxes'"}}
+            {{/js_compare}} {{#js_compare "this.fieldtype =='datearea'"}}
             <div class="edit-item">
-                <div class="edit-item-title">选项</div>
-                {{#each this.field_options.options}}
+                <div class="edit-item-title">标题2 <span class="verify">最多6个字</span></div>
+                <input class="edit-input" type="text" id="inputLabel2" value="{{label2}}" />
+            </div>
+            {{/js_compare}} {{#js_compare "this.fieldtype ==='date' || this.fieldtype === 'datearea'"}}
+            <div class="edit-item">
+                <div class="edit-item-title">日期类型 </div>
+                <label for="datetime">
+                    <input type="radio" name="datetime" id="datetime" value="1" class="radio-date" {{#js_compare "this.field_options.date_type == 1"}} checked{{/js_compare}}> 年-月-日 时 分
+                </label>
+                <br>
+                <label for="date">
+                    <input type="radio" name="datetime" value="0" id="date" class="radio-date" {{#js_compare "this.field_options.date_type == 0"}} checked{{/js_compare}}> 年-月-日
+                </label>
+            </div>
+            {{/js_compare}} {{#js_compare "this.fieldtype ==='radio' || this.fieldtype ==='checkboxes'"}}
+            <div class="edit-item">
+                <div class="edit-item-title">选项 <span class='verify {{#js_compare "this.field_options.options.length >= 20"}}verify-error{{/js_compare}}'>最多20项，每项最多10个字</span></div>
+                {{#js_compare "this.field_options.options.length ==1"}} {{#each this.field_options.options}}
                 <div class="option" data-index="{{@index}}">
-                    <input type="text" class="option-label-input" value="{{label}}">
+                    <input type="text" class="option-label-input {{maxlength label}}" value="{{label}}">
+                    <a class="js-add-option fb-button" title="Add Option"><i class="fa fa-plus-circle fa-lg"></i></a>
+                </div>
+                {{/each}} {{else}} {{#each this.field_options.options}}
+                <div class="option" data-index="{{@index}}">
+                    <input type="text" class="option-label-input {{maxlength label}}" value="{{label}}" maxlength="10">
                     <a class="js-add-option fb-button" title="Add Option"><i class="fa fa-plus-circle fa-lg"></i></a>
                     <a class="js-remove-option fb-button" title="Remove Option"><i class="fa fa-minus-circle fa-lg"></i></a>
-                    <span class="option-error option-error-null hidden">不能超过10个字</span><span class="option-error option-error-repeat hidden">有重复项</span></div>
-                {{/each}}
+                </div>
+                {{/each}} {{/js_compare}}
             </div>
-            {{/js_compare}} {{/js_compare}}
-            {{#js_compare "this.fieldtype !='group'"}}
+            {{/js_compare}} {{#js_compare "this.fieldtype =='number'"}}
+            <div class="edit-item">
+                <div class="edit-item-title">单位 </div>
+                <input class="edit-input" type="text" id="inputUnit" value="{{this.field_options.unit}}" /> </div>
+            {{/js_compare}} {{#js_compare "this.fieldtype =='price'"}}
+            <div class="edit-item">
+                <div class="edit-item-title">大写</div>
+                <input type="checkbox" id="inputCapital" {{#js_compare "this.capital === 'true'"}}checked{{/js_compare}} />
+                <label for="inputCapital"> 显示大写 </label>
+                {{/js_compare}} {{#js_compare "this.fieldtype !='group'"}}
                 <div class="edit-item">
-                <div class="edit-item-title">验证</div>
-                <input type="checkbox" id="inputRequired" {{#js_compare "this.required === 'true'"}}checked{{/js_compare}} />
-                <label for="inputRequired"> 必填 </label>
+                    <div class="edit-item-title">验证</div>
+                    <input type="checkbox" id="inputRequired" {{#js_compare "this.required === 'true'"}}checked{{/js_compare}} />
+                    <label for="inputRequired"> 必填 </label>
+                </div>
+                {{/js_compare}} {{#js_compare "this.fieldtype =='pic'"}}
+                <div class="edit-item">
+                    <div class="edit-item-title">说明： </div>
+                    <div>手机端目前只能上传图片。</div>
+                </div>
+                {{/js_compare}}
             </div>
-            {{/js_compare}}
-        
-        </div>
-        {{/this}}
+            {{/this}}
     </script>
     <script>
     (function() {
         'use strict';
-        //        Template7.registerHelper("subSort", function(fieldType,obj){
-        //          
-        //          if (fieldType === "group") {
-        //            console.log($("#" + obj.cid).length)
-        ////            Sortable.create($("#" + obj.cid)[0], {
-        ////                  group: {
-        ////                    name: 'advanced',
-        ////                    pull: true,
-        ////                    put: true
-        ////                  },
-        ////                  animation: 150
-        ////                });
-        //            console.log(obj)
-        //          }
-        //          return fieldType;
-        //        }) ;
-        //        
-        // 
-        //        
 
         //去掉空格
         Template7.registerHelper("trim", function(text) {
@@ -300,10 +344,14 @@
 
         //JSON转字符串
         Template7.registerHelper("jsonTostring", function(text) {
-            // console.log(text instanceof Object)
             var result;
             result = JSON.stringify(text);
             return result;
+        });
+
+        //最大长度
+        Template7.registerHelper("maxlength", function(text) {
+            return text.length >= 10 ? "red-border" : "";
         });
 
         //注册子模板
@@ -313,7 +361,9 @@
         })
         var sb = $("#submitBtn");
         var editView = $("#editFieldView");
+        var formBuilderEdit = $("#formBuilderEdit");
         var bv = $("#builderView");
+
         var curItem = null;
         var CID = 0;
         //option label的数组
@@ -367,12 +417,7 @@
                 filed_item.removeClass("active");
                 curItem = (evt.clone === undefined || evt.clone === null) ? $(evt.item) : $("#c" + CID);
                 curItem.addClass("active");
-                console.log("evt", evt)
-                    //            if (evt.clone === null) {
-                    //              $(evt.item).addClass("active");
-                    //            } else {
-                    //              $("#c" + CID).addClass("active");
-                    //            }
+
             },
             //遍历，获取最大的cid
             getCid: function(data) {
@@ -394,6 +439,20 @@
                     CID = Math.max.apply(null, temp);
                 }
             },
+            //顶部tips
+            tips: function(data) {
+                var $tips = $("#tips");
+                var $msg = $tips.find(".tips-content");
+                $msg.text(data.message);
+                $tips.removeClass("fadeOutUp").addClass("fadeInDown");
+                // setTimeout(function(){
+                //    $tips.removeClass("fadeInDown").addClass("fadeOutUp");
+                // }, 2000)
+                // 
+                $tips.addEventListener("webkitAnimationEnd", function() { //动画结束时事件 
+                    $tips.removeClass("fadeInDown").addClass("fadeOutUp");
+                }, false);
+            },
             //临时存储控件field_type，避免控件field_type重复
             saveFieldType: function(obj) {
                 tempArrFieldType[obj.field_type].push(obj.field_type);
@@ -406,20 +465,20 @@
             },
             //数组指定位置插入数据
             arrInsert: function(arr, index, item) {
-                console.log(index)
+                //console.log(index)
                 arr.splice(index, 0, item);
             }
         }
         var formData = {
             "title": "报销",
             "abstact": "适用于公司报销审批",
-            "icon": "/content/img/approvalIcon/approvalIcon_3.png",
+            "icon": "./content/img/approvalIcon/approvalIcon_3.png",
             "fields": [{
                 "label": "报销类型",
                 "field_type": "radio",
                 "required": true,
                 "capital": true,
-                "describe": "请输入",
+                "describe": "请选择",
                 "field_options": {
                     "options": [{
                         "label": "办公费",
@@ -451,16 +510,26 @@
                 "field_options": {},
                 "cid": "c5"
             }, {
+                "label": "日期",
+                "field_type": "date",
+                "required": true,
+                "capital": true,
+                "describe": "请选择",
+                "field_options": {
+                    "date_type": "0"
+                },
+                "cid": "c335"
+            }, {
                 "label": "分组",
                 "field_type": "group",
                 "required": false,
                 "capital": false,
-                "describe": "请输入",
+                "describe": "添加明细",
                 "field_options": {},
                 "group": [{
                     "label": "费用明细",
                     "field_type": "radio",
-                    "describe": "请输入",
+                    "describe": "请选择",
                     "required": false,
                     "capital": true,
                     "field_options": {
@@ -492,7 +561,7 @@
             }, {
                 "label": "分组2",
                 "field_type": "group",
-                "describe": "请输入",
+                "describe": "添加明细",
                 "required": false,
                 "capital": false,
                 "group": [{
@@ -506,7 +575,7 @@
                     "cid": "c162"
                 }, {
                     "label": "费用4细2",
-                    "describe": "请输入",
+                    "describe": "请选择",
                     "field_type": "radio",
                     "required": false,
                     "capital": true,
@@ -530,26 +599,20 @@
                 init: function(data) {
                     formTool.getCid(data.fields);
                     var _this = this;
+
                     if (data) {
                         formTool.render($("#form_items_template"), data, function(html) {
                             bv.html(html);
                         });
+
                         for (var i = 0; i < data.fields.length; i++) {
                             var field = data.fields[i];
-                            //console.log("field", field)
                             formTool.saveFieldType(field);
-
-                            // //初始化单选，多选
-                            // if(field.field_type === "radio" || field.field_type === "checkbox"){
-                            //     field.field_options = JSON.stringify(field.field_options);
-                            // }
-
                             if (field.field_type === "group") {
                                 for (var j in field.group) {
                                     var groupField = field.group[j];
                                     formTool.saveFieldType(groupField);
                                 }
-
                                 this.arrSortable.push(Sortable.create($("#" +
                                     field.cid)[0], {
                                     group: {
@@ -574,8 +637,17 @@
                                 }))
                             }
                         }
-                        //console.log(tempArrFieldType);
+                    } else {
+                        data = {
+                            "title": "",
+                            "abstact": "",
+                            "icon": "",
+                        };
                     }
+
+                    formTool.render($("#form_set_template"), data, function(html) {
+                        $("#formBuilderEdit").html(html);
+                    });
                 },
                 onAdd: function(evt) {
                     CID += 1;
@@ -585,30 +657,26 @@
                         "label": "",
                         "describe": "请输入",
                         "field_type": "",
-                        "required": true,
-                        "capital": true,
+                        "required": false,
                         "field_options": {},
                         "cid": cid
                     };
-
                     var item = $(evt.item);
                     var itemType = item.data("type");
 
-                    // switch(itemType){
-                    //   case "text":
-
-                    // }
-
                     obj.field_type = itemType;
 
-
-                    //console.log(evt.item.parentElement)
                     if (itemType) {
                         var len = tempArrFieldType[itemType].length;
+                        var text = item.text();
+                        if (itemType == "price") {
+                            text = text + "(元)"
+                        }
                         if (len) {
-                            obj.label = item.text() + "(" + (len + 1) + ")";
+
+                            obj.label = text + "(" + (len + 1) + ")";
                         } else {
-                            obj.label = item.text();
+                            obj.label = text;
                         }
                         tempArrFieldType[itemType].push(itemType);
                         //单选、多选
@@ -617,22 +685,40 @@
                             case "checkboxes":
                                 obj.field_options = {
                                         options: [{
-                                            label: "",
+                                            label: "选项1",
                                             checked: false
                                         }, {
-                                            label: "",
+                                            label: "选项2",
                                             checked: false
                                         }, {
-                                            label: "",
+                                            label: "选项3",
                                             checked: false
                                         }]
                                     },
                                     obj.describe = "请选择";
                                 break;
+                                //日期
                             case "date":
-                            case "datearea":
-                                obj.describe = "请选择";
+                                obj.field_options = {
+                                        date_type: 1
+                                    },
+                                    obj.describe = "请选择";
                                 break;
+                                // 日期区间
+                            case "datearea":
+                                obj.field_options = {
+                                        date_type: 1
+                                    },
+                                    obj.describe = "请选择";
+                                obj.label = "开始时间";
+                                obj.label2 = "结束时间";
+
+                                break;
+                            case "price":
+
+                                obj.capital = true;
+                                break;
+
                         }
 
                         formTool.render($("#view_" + itemType), obj, function(html) {
@@ -672,6 +758,7 @@
                         curItem = (evt.clone === undefined || evt.clone === null) ? $(evt.item) : $("#c" + CID);
                     }
 
+                    var type = curItem.data("fieldtype");
                     console.log(curItem)
                         //console.log($("#c"+CID).data("id"))
                     var obj = {};
@@ -680,6 +767,16 @@
                     obj.required = curItem.attr("data-required");
                     obj.fieldtype = curItem.attr("data-fieldtype");
                     obj.field_options = JSON.parse(curItem.attr("data-fieldoptions"));
+
+
+                    switch (type) {
+                        case "datearea":
+                            obj.label2 = curItem.attr("data-label2");
+                            break;
+                        case "price":
+                            obj.capital = curItem.attr("data-capital");
+                            break;
+                    }
 
                     // if (obj.field_options.hasOwnProperty("options")) {
                     //     for (var i in obj.field_options.options) {
@@ -795,8 +892,40 @@
         editView.on("input", "#inputLabel", function() {
             var _this = $(this);
             var val = _this.val();
+            var type = curItem.data("fieldtype");
             curItem.attr("data-label", val);
-            curItem.find(".text").text(val);
+
+            switch (type) {
+                case "group":
+                    curItem.find(".group-title").text(val);
+                    break;
+                case "datearea":
+                    curItem.find(".handle").eq(0).find(".text").text(val);
+                    break;
+                default:
+                    curItem.find(".text").text(val);
+                    break;
+            }
+
+
+
+            if (val.length > 4) {
+
+                FormBuilder.canSubmit = false;
+
+                console.log(FormBuilder.canSubmit)
+            } else {
+                FormBuilder.canSubmit = true;
+            }
+            formTool.checkSubmit();
+        });
+
+        //编辑框,标题2
+        editView.on("input", "#inputLabel2", function() {
+            var _this = $(this);
+            var val = _this.val();
+            curItem.find(".handle").eq(1).find(".text").text(val);
+            curItem.attr("data-label2", val);
 
             if (val.length > 4) {
 
@@ -813,8 +942,45 @@
         editView.on("input", "#inputDes", function() {
             var _this = $(this);
             var val = _this.val();
+            var type = curItem.data("fieldtype");
             curItem.attr("data-describe", val);
-            curItem.find(".describe").text(val);
+
+
+            if (type === "group") {
+                curItem.find(".group-tips").text(val);
+            } else {
+                curItem.find(".describe").text(val);
+            }
+
+            if (val.length > 10) {
+
+                FormBuilder.canSubmit = false;
+
+                console.log(FormBuilder.canSubmit)
+            } else {
+                FormBuilder.canSubmit = true;
+            }
+            formTool.checkSubmit();
+        });
+
+        //编辑框,单位
+        editView.on("input", "#inputUnit", function() {
+            var _this = $(this);
+            var val = _this.val();
+            var type = curItem.data("fieldtype");
+            var options = JSON.parse(curItem.attr("data-fieldoptions"));
+
+            options.unit = "(" + val + ")";
+
+            if (val.length) {
+                options.unit = "（" + val + "）";
+            } else {
+                options.unit = "";
+            }
+
+            curItem.find(".unit").text(options.unit);
+
+            curItem.attr("data-fieldoptions", JSON.stringify(options));
 
             if (val.length > 10) {
 
@@ -832,6 +998,28 @@
             var isRequired = _this.prop("checked");
             curItem.attr("data-required", isRequired);
             curItem.find(".required").text(isRequired ? "(必填)" : "");
+        });
+        //编辑框 日期类型选择
+        editView.on("click", ".radio-date", function() {
+            var _this = $(this);
+            var val = _this.val();
+            var obj = {
+                date_type: val
+            };
+            curItem.attr("data-fieldoptions", JSON.stringify(obj));
+        });
+        // 编辑框 大写
+        editView.on("click", "#inputCapital", function() {
+            var _this = $(this);
+            var checked = _this.prop("checked");
+            var $capital = curItem.find(".capital");
+            curItem.attr("data-capital", checked);
+            if (checked) {
+                $capital.removeClass("hidden");
+            } else {
+                $capital.addClass("hidden");
+            }
+
         })
 
         //默认tab显示
@@ -852,16 +1040,50 @@
         //单选、多选选项操作
         //添加
         editView.on("click", ".js-add-option", function() {
+            var MAX_ITEM_LENGTH = 20;
             var _this = $(this);
             var option = _this.parent();
             var index = option.data("index");
             var curItemOption = curItem.attr("data-fieldoptions");
             var jsonData = JSON.parse(curItemOption);
-
+            var jsonOptions = jsonData.options;
+            var jsonOptionsLen = jsonOptions.length;
+            var parents = _this.parents(".edit-item");
+            var verify = parents.find(".verify");
             var arrObj = {
                 label: "",
                 checked: false
             }
+            var reg = /^(选项).*?\d$/;
+            var tempArr = [];
+
+            //选项不能大于20条
+            if (jsonOptionsLen >= MAX_ITEM_LENGTH) {
+                verify.addClass("verify-error");
+                //  formTool.tips({message:"选项不能大于20条！"});
+                return;
+            }
+
+            for (var i = 0; i < jsonOptionsLen; i++) {
+                if (reg.test(jsonOptions[i].label)) {
+                    tempArr.push(jsonOptions[i].label);
+                }
+            }
+            if (tempArr.length) {
+                var j = 1;
+                while (true) {
+                    if (tempArr.indexOf("选项" + j) >= 0) {
+                        j++;
+                    } else {
+                        break;
+                    }
+                }
+                arrObj.label = "选项" + j;
+            } else {
+                tempArr.push("选项1");
+                arrObj.label = "选项1";
+            }
+
             formTool.arrInsert(jsonData.options, index + 1, arrObj);
             curItem.attr("data-fieldoptions", JSON.stringify(jsonData));
             var obj = {};
@@ -922,6 +1144,18 @@
                 var curItemOption = curItem.attr("data-fieldoptions");
                 var val = _this.val();
                 var jsonData = JSON.parse(curItemOption);
+                var parents = _this.parents(".edit-item");
+                var jsonDataLen = jsonData.options.length;
+                var verify = parents.find(".verify");
+                if (val.length >= 10) {
+                    verify.addClass("verify-error");
+                    // return;
+                } else {
+                    console.log(jsonDataLen)
+                    if (verify.hasClass("verify-error") && jsonDataLen < 20) {
+                        verify.removeClass("verify-error");
+                    }
+                }
 
                 jsonData.options[index].label = val;
                 curItem.attr("data-fieldoptions", JSON.stringify(jsonData));
@@ -934,15 +1168,55 @@
             // var fi = bv.find(".filed-item");
             // fi.removeClass("filed-item-hover");
             // $(this).addClass("filed-item-hover")
-        })
+        });
+
+        //表单设置
+        //图标
+        formBuilderEdit.on("click", "li", function() {
+            var li = formBuilderEdit.find("li");
+            li.removeClass("active");
+            $(this).addClass("active");
+            formData.icon = $(this).find("img").attr("src");
+
+        });
+        //名称
+        formBuilderEdit.on("input", "#inputSetTitle", function() {
+            formData.title = $(this).val();
+        });
+        //说明
+        formBuilderEdit.on("input", "#inputSetAbstact", function() {
+            formData.abstact = $(this).val();
+        });
 
         //提交
         sb.click(function() {
+             var postData = {};
             $("#builderView").children(".filed-item").each(function() {
-                console.log($(this).data("label"))
-            })
+               
+                postData.title = formData.title;
+                postData.abstact = formData.abstact;
+                postData.icon = formData.icon;
+                postData.fields = [];
+                bv.children(".filed-item").each(function() {
+                    var item = {};
+                    var _this = $(this);
+                    var type = _this.data("fieldtype");
+                    if (type === "group") {
+                        item.group = [];
+                        _this.find(".filed-item").each(function(){
+                            var _that = $(this);
+                            var subItem = {};
+                            subItem.label = _that.attr("data-label");
+                             item.group.push(subItem);
+                        });
 
-        })
+                    }
+                    item.label = _this.attr("data-label");
+                    postData.fields.push(item);
+                });
+            })
+            console.log(postData)
+        });
     })();
     // Background
     document.addEventListener("DOMContentLoaded", function() {
